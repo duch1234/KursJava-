@@ -38,7 +38,7 @@ public class Main {
 
 			}
 			int[] sumaZPrzedmiotu = new int[notes.length];
-			Double[] sredniaZPrzedmiotu = new Double[notes[row].length];
+			double[] sredniaZPrzedmiotu = new double[notes[row].length];
 
 			sumaZPrzedmiotu[row]=sum;
 			sredniaZPrzedmiotu[row]=(double)(sumaZPrzedmiotu[row])/notes[row].length;
