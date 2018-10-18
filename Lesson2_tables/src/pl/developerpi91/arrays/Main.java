@@ -17,6 +17,8 @@ public class Main {
 //		System.out.println(array.maxFromThreeElementsArray());
 
 		System.out.println(Arrays.toString(Sudoku.createBoard()));
+//		System.out.println(Arrays.toString(Sudoku.createBoardMethod2()));
+
 		
 	}
 
