@@ -25,9 +25,9 @@ public class ButtonListener implements ActionListener {
 		try {
 			buttonType=e.getActionCommand().toString();
 			LOG.debug("Button Clicked: << {} >>", buttonType );
-			if (buttonType.equals("Generatuj Karty")) {
+			if (buttonType.equals("Generuj Karty")) {
 				System.out.println("pizda");
-			}else if(buttonType.equals("Generatuj Stb")){
+			}else if(buttonType.equals("Generuj STB")){
 				System.out.println("pizda2");
 			}
 			else {

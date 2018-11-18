@@ -22,11 +22,17 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Panel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
+
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JButton;
+import javax.swing.JTextArea;
+import javax.swing.DropMode;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 public class GeneratorView {
 
@@ -65,6 +71,7 @@ public class GeneratorView {
 	private Panel  panel_2;
 	private JButton btnGeneratujKarty;
 	private JButton btnGeneratujStb;
+	private JEditorPane console;
 
 	/**
 	 * Launch the application.
@@ -137,6 +144,7 @@ public class GeneratorView {
 		frame.getContentPane().add(chckbxCheckSum);
 		
 		textFieldIlosc = new JFormattedTextField();
+		textFieldIlosc.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldIlosc.setBounds(127, 74, 100, 23);
 		frame.getContentPane().add(textFieldIlosc);
 		
@@ -149,9 +157,8 @@ public class GeneratorView {
 		txtpnIlo.setBounds(41, 77, 62, 20);
 		frame.getContentPane().add(txtpnIlo);
 		
-		JEditorPane console = new JEditorPane();
-		console.setEditable(false);
-		console.setBounds(452, 318, 353, 96);
+		console = new JEditorPane();
+		console.setBounds(578, 301, 108, 113);
 		frame.getContentPane().add(console);
 		
 		Panel panel_1 = new Panel();
@@ -332,11 +339,11 @@ public class GeneratorView {
 		gbc_ftfZakresStb.gridy = 1;
 		panel_2.add(ftfZakresStb, gbc_ftfZakresStb);
 		
-		btnGeneratujKarty = new JButton("Generatuj Karty");
+		btnGeneratujKarty = new JButton("Generuj Karty");
 		btnGeneratujKarty.setBounds(526, 157, 125, 23);
 		frame.getContentPane().add(btnGeneratujKarty);
 		
-		btnGeneratujStb = new JButton("Generatuj STB");
+		btnGeneratujStb = new JButton("Generuj STB");
 		btnGeneratujStb.setBounds(526, 267, 125, 23);
 		frame.getContentPane().add(btnGeneratujStb);
 		
@@ -349,6 +356,19 @@ public class GeneratorView {
 		ftfPrefixEsnSTB.setHorizontalAlignment(SwingConstants.CENTER);
 		ftfPrefixEsnSTB.setBounds(25, 353, 125, 20);
 		frame.getContentPane().add(ftfPrefixEsnSTB);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(181, 301, 376, 113);
+		frame.getContentPane().add(scrollPane);
+		
+		textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
+		textArea.setLineWrap(true);
+		textArea.setToolTipText("dg\r\nd\r\nd\r\nd\r\nd\r\nd\r\n\r\nd\r\nd\r\nd\r\ndd");
+		textArea.setTabSize(30);
+		textArea.setWrapStyleWord(true);
+		
+
 	}
 	
 	// =============================================================== METHODS AND LISTENERS ================================================================================
@@ -356,6 +376,8 @@ public class GeneratorView {
 	public void addInputListenerValidator(ActionListener inputVerifier) {
 		textFieldIlosc.addActionListener(inputVerifier);
 		
+		
+//		ftfPrefixCard.getDocument().addDocumentListener(listener);
 		//Card
 		ftfPrefixCard.addActionListener(inputVerifier);			//diff in STB
 		ftfRokCard.addActionListener(inputVerifier);
@@ -369,6 +391,12 @@ public class GeneratorView {
 		ftfEowStb.addActionListener(inputVerifier);
 		ftfNumerPaczkiStb.addActionListener(inputVerifier);
 		ftfZakresStb.addActionListener(inputVerifier);
+	}
+	public void addConsoleListener(ActionListener console) {
+		 Timer timer = new Timer(1000, console);
+		 timer.addActionListener(console);
+		 timer.start();
+
 	}
 	
 	public void addCheckSumListener(ActionListener checkSum) {
@@ -397,6 +425,9 @@ public class GeneratorView {
 	}
 	
     //=============================================== GETTERs AND SETTERs FOR JFormattedTextField ELEMENTs ===================================================================
+//	public JEditorPane getConsole() {
+//		return textArea;
+//	}
 	public JFormattedTextField getTextFieldIlosc() {
 		return textFieldIlosc;
 	}
@@ -445,47 +476,60 @@ public class GeneratorView {
 		return ftfPrefixEsnSTB;
 	}
 
-	public void setFtfPrefixCard(JFormattedTextField ftfPrefixCard) {
-		this.ftfPrefixCard = ftfPrefixCard;
+	public void setFtfPrefixCard(String ftfPrefixCard) {
+		this.ftfPrefixCard.setText(ftfPrefixCard) ;
 	}
 
-	public void setFtfEowCard(JFormattedTextField ftfEowCard) {
-		this.ftfEowCard = ftfEowCard;
+	public void setFtfEowCard(String ftfEowCard) {
+		this.ftfEowCard.setText(ftfEowCard);
 	}
 
-	public void setFtfNumerPaczkiCard(JFormattedTextField ftfNumerPaczkiCard) {
-		this.ftfNumerPaczkiCard = ftfNumerPaczkiCard;
+	public void setFtfNumerPaczkiCard(String ftfNumerPaczkiCard) {
+		this.ftfNumerPaczkiCard.setText(ftfNumerPaczkiCard);
 	}
 
-	public void setFtfZakresCard(JFormattedTextField ftfZakresCard) {
-		this.ftfZakresCard = ftfZakresCard;
+	public void setFtfZakresCard(String ftfZakresCard) {
+		this.ftfZakresCard.setText(ftfZakresCard);
 	}
 
-	public void setFtfRokCard(JFormattedTextField ftfRokCard) {
-		this.ftfRokCard = ftfRokCard;
+	public void setFtfRokCard(String ftfRokCard) {
+		this.ftfRokCard.setText(ftfRokCard);
 	}
 
-	public void setFtfPrefixStb(JFormattedTextField ftfPrefixStb) {
-		this.ftfPrefixStb = ftfPrefixStb;
+	public void setFtfPrefixStb(String ftfPrefixStb) {
+		this.ftfPrefixStb.setText(ftfPrefixStb);
 	}
 
-	public void setFtfRokStb(JFormattedTextField ftfRokStb) {
-		this.ftfRokStb = ftfRokStb;
+	public void setFtfRokStb(String ftfRokStb) {
+		this.ftfRokStb.setText(ftfRokStb);
 	}
 
-	public void setFtfEowStb(JFormattedTextField ftfEowStb) {
-		this.ftfEowStb = ftfEowStb;
+	public void setFtfEowStb(String ftfEowStb) {
+		this.ftfEowStb.setText(ftfEowStb);
 	}
 
-	public void setFtfNumerPaczkiStb(JFormattedTextField ftfNumerPaczkiStb) {
-		this.ftfNumerPaczkiStb = ftfNumerPaczkiStb;
+	public void setFtfNumerPaczkiStb(String ftfNumerPaczkiStb) {
+		this.ftfNumerPaczkiStb.setText(ftfNumerPaczkiStb);
 	}
 
-	public void setFtfZakresStb(JFormattedTextField ftfZakresStb) {
-		this.ftfZakresStb = ftfZakresStb;
+	public void setFtfZakresStb(String ftfZakresStb) {
+		this.ftfZakresStb.setText(ftfZakresStb);
 	}
 
-	public void setFtfPrefixEsnSTB(JFormattedTextField ftfPrefixEsnSTB) {
-		this.ftfPrefixEsnSTB = ftfPrefixEsnSTB;
+	public void setFtfPrefixEsnSTB(String ftfPrefixEsnSTB) {
+		this.ftfPrefixEsnSTB.setText(ftfPrefixEsnSTB);
 	}
+	public void setTextFieldIlosc(String textFieldIlosc) {
+		this.textFieldIlosc.setText(textFieldIlosc) ;
+	}
+
+	public void setConsole(String console) {
+		this.textArea.setText(console);
+	}
+	Timer timer = new Timer(100, new ActionListener() {
+	     public void actionPerformed(ActionEvent e) {
+	    	 System.out.println("dupa");
+	     }
+	});
+	private JTextArea textArea;
 }
