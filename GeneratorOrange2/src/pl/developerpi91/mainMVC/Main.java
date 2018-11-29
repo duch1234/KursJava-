@@ -17,11 +17,15 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-
+					LOG.debug("Running Application...");
 					GeneratorView view = new GeneratorView();
 					GeneratorModel model = new GeneratorModel();
 					GeneratorController controller = new GeneratorController(model, view);
-					LOG.info("RUN Application << OK >>");
+					System.out.println(model.toString());
+					LOG.debug("RUN Application << OK >>");
+//					
+//					String a = model.toString();
+//					LOG.info("Initialized data:\n\r{}", a);
 
 
 				} catch (Exception e) {

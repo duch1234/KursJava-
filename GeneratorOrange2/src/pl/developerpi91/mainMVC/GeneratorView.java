@@ -58,6 +58,9 @@ public class GeneratorView {
 	private JFormattedTextField ftfZakresStb;
 	private JFormattedTextField ftfPrefixEsnSTB;
 	
+	private JTextArea console;
+
+	
 	private JLabel lblRok;
 	private JLabel lblEow;
 	private JLabel lblNumerPaczki;
@@ -71,7 +74,6 @@ public class GeneratorView {
 	private Panel  panel_2;
 	private JButton btnGeneratujKarty;
 	private JButton btnGeneratujStb;
-	private JEditorPane console;
 
 	/**
 	 * Launch the application.
@@ -156,10 +158,6 @@ public class GeneratorView {
 		txtpnIlo.setText("Ilosc");
 		txtpnIlo.setBounds(41, 77, 62, 20);
 		frame.getContentPane().add(txtpnIlo);
-		
-		console = new JEditorPane();
-		console.setBounds(578, 301, 108, 113);
-		frame.getContentPane().add(console);
 		
 		Panel panel_1 = new Panel();
 		panel_1.setBounds(25, 115, 405, 71);
@@ -361,12 +359,12 @@ public class GeneratorView {
 		scrollPane.setBounds(181, 301, 376, 113);
 		frame.getContentPane().add(scrollPane);
 		
-		textArea = new JTextArea();
-		scrollPane.setViewportView(textArea);
-		textArea.setLineWrap(true);
-		textArea.setToolTipText("dg\r\nd\r\nd\r\nd\r\nd\r\nd\r\n\r\nd\r\nd\r\nd\r\ndd");
-		textArea.setTabSize(30);
-		textArea.setWrapStyleWord(true);
+		console = new JTextArea();
+		scrollPane.setViewportView(console);
+		console.setLineWrap(true);
+		console.setToolTipText("dg\r\nd\r\nd\r\nd\r\nd\r\nd\r\n\r\nd\r\nd\r\nd\r\ndd");
+		console.setTabSize(30);
+		console.setWrapStyleWord(true);
 		
 
 	}
@@ -524,12 +522,11 @@ public class GeneratorView {
 	}
 
 	public void setConsole(String console) {
-		this.textArea.setText(console);
+		this.console.setText(console);
 	}
 	Timer timer = new Timer(100, new ActionListener() {
 	     public void actionPerformed(ActionEvent e) {
 	    	 System.out.println("dupa");
 	     }
 	});
-	private JTextArea textArea;
 }

@@ -5,10 +5,9 @@ import java.awt.event.ActionListener;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import pl.developerpi91.viewActionListener.GeneratorCard;
-import pl.developerpi91.viewActionListener.GeneratorStb;
 
-import pl.developerpi91.mainMVC.GeneratorView;;
+import pl.developerpi91.mainMVC.GeneratorView;
+import pl.developerpi91.mainMVC.GeneratorController;
 
 public class ButtonListener implements ActionListener {
 	private GeneratorView view;
@@ -22,23 +21,27 @@ public class ButtonListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String buttonType;
+				
 		try {
+			GeneratorController.updateModel();
+
 			buttonType=e.getActionCommand().toString();
 			LOG.debug("Button Clicked: << {} >>", buttonType );
+			
 			if (buttonType.equals("Generuj Karty")) {
-				System.out.println("pizda");
+				
 			}else if(buttonType.equals("Generuj STB")){
-				System.out.println("pizda2");
+				
 			}
 			else {
 				LOG.error("Button Clicked: << {} >> UNKNOWN OPEARTION", buttonType);
 			}
-			LOG.debug("Button Clicked: << {} >> Action END", buttonType);
+			LOG.debug("Button Clicked: << {} >> Action FINISHED << OK >>", buttonType);
 		}catch(Exception exc) {
 			LOG.error("EROR occurs");
 			LOG.error(exc.getMessage());
 		}
-		
-		
 	}
+	
+
 }

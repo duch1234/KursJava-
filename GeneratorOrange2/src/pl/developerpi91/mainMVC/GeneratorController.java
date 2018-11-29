@@ -1,13 +1,5 @@
 package pl.developerpi91.mainMVC;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,26 +12,25 @@ import pl.developerpi91.viewActionListener.ConsoleListener;
 
 public class GeneratorController {
 
-	private GeneratorView view;
-	private GeneratorModel model;
+	private static GeneratorView view;
+	private static GeneratorModel model;
 	
-	private Timer timer = null;
 	
     private static final Logger LOG = LogManager.getLogger(GeneratorController.class);
 
 	public GeneratorController(GeneratorModel model,GeneratorView view) {
-		this.view = view;
-		this.model = model;
+		GeneratorController.view = view;
+		GeneratorController.model = model;
 		LOG.info("INITIALIZE VIEW");
 		initialView();
 		LOG.info("INITIALIZE VIEW << OK >>");
 //		readLog();
 
-		this.view.addCardTypeListener(new CardTypeListener(view));
-		this.view.addCheckSumListener(new CheckSumListener(view));
-		this.view.addInputListenerValidator(new InputListenerValidator(view));
-		this.view.addButtonListener(new ButtonListener(view));
-		this.view.addConsoleListener(new ConsoleListener(view) );
+		GeneratorController.view.addCardTypeListener(new CardTypeListener(view));
+		GeneratorController.view.addCheckSumListener(new CheckSumListener(view));
+		GeneratorController.view.addInputListenerValidator(new InputListenerValidator(view));
+		GeneratorController.view.addButtonListener(new ButtonListener(view));
+		GeneratorController.view.addConsoleListener(new ConsoleListener(view) );
 
 	}
 	
@@ -71,41 +62,40 @@ public class GeneratorController {
 		}
 		
 		//General View
-		view.setTextFieldIlosc(model.getIlosc());			
+		view.setTextFieldIlosc(Integer.toString(model.getIlosc()));			
 	}
-	private void readLog() {
-		System.out.println("dupa");
-		timer = new Timer(100, new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				BufferedReader br;
-				try {
-					br = new BufferedReader(new FileReader("D:\\Workspaces\\rpi\\GeneratorOrange2\\logs\\propertieslogs.log"));
-					String line;
-					while((line=br.readLine())!=null) {
-						System.out.println(line);
-						view.setConsole(line);
-						
-						System.out.println("asdasdasdasdsdasdasada");
-
-					}
-//					System.out.println(br.readLine().toString());
-//					System.out.println("dupa");
-//					view.setConsole(br.readLine().toString());
-//					System.out.println(br.readLine());
-//					view.setConsole("piiiii");
-					br.close();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-	
-			}
+	public static void updateModel() {
+		try {
+		//CARD View
+		model.setCardPrefix(view.getFtfPrefixCard().getText());
+		model.setRok(view.getFtfRokCard().getText());
+		model.setEow(view.getFtfEowCard().getText());
+		model.setCardNumerPaczki(view.getFtfNumerPaczkiCard().getText());
+		model.setCardZakres(view.getFtfZakresCard().getText());
+		}
+		catch(Exception e) {
+			LOG.error("CARD Model not update properly \n{}", e.getMessage());
+		}
+		
+		try {
+		//STB View
+		model.setStbPrefixSn(view.getFtfPrefixStb().getText());
+		model.setRok(view.getFtfRokStb().getText());
+		model.setEow(view.getFtfEowStb().getText());
+		model.setStbNumerPaczki(view.getFtfNumerPaczkiStb().getText());
+		model.setStbZakres(view.getFtfZakresStb().getText());
+		model.setStbPrefixEsn(view.getFtfPrefixEsnSTB().getText());
+		}
+		catch(Exception e) {
+			LOG.error("STB Model not update properly \n{}", e.getMessage());
 			
-		});
+		//General View
+		model.setIlosc(view.getTextFieldIlosc().getText());
+		LOG.info("Model updated << OK >>");
+		}
 		
 
 	}
+
 	
 }

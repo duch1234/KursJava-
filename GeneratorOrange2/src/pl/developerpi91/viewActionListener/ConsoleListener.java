@@ -42,9 +42,6 @@ public class ConsoleListener implements ActionListener {
 				}
 				view.setConsole(sbf.toString());
 				sbf= null;
-				System.out.println(sbf);
-
-
 				br.close();
 			} catch (IOException e1) {
 				e1.printStackTrace();
