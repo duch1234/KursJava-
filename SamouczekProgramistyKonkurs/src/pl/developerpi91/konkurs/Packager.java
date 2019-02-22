@@ -15,12 +15,13 @@ public class Packager {
     public static void main(String[] args) {
         PackageScanner ps = new PackageScanner();
         int paperSize = 0;
-
+        int totalPaperSize=0;
         for (Pack packet:ps.packageList) {
             paperSize = packet.computeTotalPackArea() + packet.computeTheLowestPackSide();
+            totalPaperSize=totalPaperSize+paperSize;
         }
 
-        System.out.println("Całkowita ilość potrzbengo papeieru wynosi: " +  paperSize);
+        System.out.println("Całkowita ilość potrzbengo papeieru wynosi: " +  totalPaperSize);
     }
 
 }
